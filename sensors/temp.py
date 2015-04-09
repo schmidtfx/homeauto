@@ -2,6 +2,7 @@ import os
 import glob
 import time
 import json
+import ConfigParser
 
 from kafka import SimpleProducer, KafkaClient
 
@@ -34,11 +35,18 @@ def read_temp():
 kafka = KafkaClient("192.168.0.25:9092")
 producer = SimpleProducer(kafka)
 
+config = ConfigParser.ConfigParser()
+config.readfp(open('temp.cfg'))
+sensor_id = str(config.get("Sensor", "id"))
+freq = int(config.get("Sensor", "freq"))
+
+print "Sensor id: %s - sampling frequency: %d" % (sensor_id, freq)
+
 while True:
   temp_c, temp_f = read_temp()
   msg = {
     "sensor" : {
-      "id" : "1"
+      "id" : sensor_id
     },
     "time" : int(time.time() * 1000),
     "value" : temp_c
@@ -47,4 +55,4 @@ while True:
   producer.send_messages("sensorstream", json.dumps(msg))
 
   print temp_c
-  time.sleep(240)
+  time.sleep(freq)
