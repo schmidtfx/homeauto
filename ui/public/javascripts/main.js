@@ -42,7 +42,7 @@ var loaddata = function(starttime, endtime) {
           value: '#33339F'
         },
         names: {
-          value: "Temperature Livingroom"
+          value_real: "Temperature Livingroom"
         }
       },
       point: {
@@ -75,13 +75,13 @@ var loaddata = function(starttime, endtime) {
     d.time = new Date(d.time);
     var now = new Date();
     var diff = ((now - d.time) / 1000).toFixed(0);
-    $('#temp').text(d.value.toFixed(2));
+    $('#temp').text(d.value_real.toFixed(2));
     $('#time').text(dateFormat(d.time, "yyyy-mm-dd HH:MM:ss"));
     $('#ago').text(diff);
-    if(d.value < 20) {
+    if(d.value_real < 20) {
       $('#comfort').removeClass().addClass("label label-primary");
       $('#comfort').text("Too cold!");
-    } else if(d.value >= 20 && d.value <= 23.5) {
+    } else if(d.value_real >= 20 && d.value_real <= 23.5) {
       $('#comfort').removeClass().addClass("label label-success");
       $('#comfort').text("Comfy :)");
     } else {
