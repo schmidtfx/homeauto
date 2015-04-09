@@ -35,7 +35,7 @@ var loaddata = function(starttime, endtime) {
         json: data,
         keys: {
           x: 'time',
-          value: ['value']
+          value: ['value_real']
         },
         type: 'spline',
         colors: {
