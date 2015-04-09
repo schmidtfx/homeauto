@@ -39,7 +39,7 @@ var loaddata = function(starttime, endtime) {
         },
         type: 'spline',
         colors: {
-          value: '#33339F'
+          value_real: '#33339F'
         },
         names: {
           value_real: "Temperature Livingroom"
