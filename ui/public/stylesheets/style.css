@@ -1,0 +1,21 @@
+body {
+  padding-top: 50px;
+  font: 9pt "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+#tempCurrent {
+  margin-bottom: 50px;
+}
+
+#temp {
+  font-weight: bold;
+}
+
+.c3-region.regionY {
+  fill: #90EE90;
+}
+

@@ -1,0 +1,35 @@
+doctype html
+html
+  head
+    meta(name="viewport", content="width=device-width, initial-scale=1")
+    title= title
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.9/c3.min.css')
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css')
+    link(rel='stylesheet', href='/stylesheets/style.css')
+  body
+    div.navbar.navbar-inverse.navbar-fixed-top(role="navigation")
+      div.container-fluid
+        div.navbar-header
+          button.navbar-toggle.collapsed(type="button", data-toggle="collapse", data-target="#navbar", aria-expanded="false", aria-controls="navbar")
+            span.sr-only
+              | Toggle Navigation
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          a.navbar-brand(href="/")
+            | Home Automation
+        div.collapse.navbar-collapse#navbar
+          ul.nav.navbar-nav
+            li(class=(page=="home" ? "active" : ""))
+              a(href='/')
+                | Home
+            li(class=(page=="temperature" ? "active" : ""))
+              a(href='/temperature')
+                | Temperature
+    block content
+    script(src='https://code.jquery.com/jquery-2.1.3.min.js')
+    script(src='http://stevenlevithan.com/assets/misc/date.format.js')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.9/c3.min.js')
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js')
+    script(src='/javascripts/main.js')

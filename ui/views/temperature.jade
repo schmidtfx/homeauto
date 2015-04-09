@@ -1,0 +1,33 @@
+extends layout
+
+block content
+  div.container
+    div.page-header
+      h1
+        | Temperature Monitor
+    div.row
+      div.col-md-10
+        div#tempCurrent
+          | Last Measurement:&nbsp;
+          span#temp
+          | &deg;C at&nbsp;
+          span#time
+          | &nbsp;(
+          span#ago
+          | &nbsp;seconds ago)&nbsp;
+          span.label#comfort
+      div.col-md-2
+        div.pull-right
+          button.btn.btn-default#refresh(type="button")
+            | Refresh&nbsp;
+            span.glyphicon.glyphicon-refresh
+    div.row
+      div.col-md-3
+        select.form-control#filter
+          option(value="last24")
+            | Last 24 hours
+          option(value="lastWeek")
+            | Last week
+          option(value="max")
+            | Max
+    div#tempChart
