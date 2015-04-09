@@ -36,7 +36,13 @@ producer = SimpleProducer(kafka)
 
 while True:
   temp_c, temp_f = read_temp()
-  msg = { "time" : int(time.time() * 1000), "value" : temp_c } 
+  msg = {
+    "sensor" : {
+      "id" : "1"
+    },
+    "time" : int(time.time() * 1000),
+    "value" : temp_c
+  }
 
   producer.send_messages("sensorstream", json.dumps(msg))
 
