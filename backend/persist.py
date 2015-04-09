@@ -7,8 +7,6 @@ from kafka import KafkaConsumer
 
 conn = sqlite3.connect('temp.db')
 c = conn.cursor()
-c.execute('CREATE TABLE IF NOT EXISTS temperature (time integer, value real)')
-conn.commit()
 
 consumer = KafkaConsumer(
   "sensorstream",
@@ -22,7 +20,7 @@ for m in consumer:
   print m
   msg = json.loads(m.value)
 
-  c.execute('INSERT INTO temperature VALUES (' + str(msg["time"]) + ', ' + str(msg["value"]) + ')')
+  c.execute('INSERT INTO sensorstream (sensor_fk, time, value_real)  VALUES (' + str(msg["sensor"]["id"]) + ', ' + str(msg["time"]) + ', ' + str(msg["value"]) + ')')
   conn.commit()
 
   consumer.task_done(m)
