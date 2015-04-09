@@ -23,14 +23,14 @@ router.get('/api/v1/temperature', function(req, res, next) {
     filter = "WHERE time <= " + req.query.endtime;
   }
 
-  var stmt = "SELECT * FROM temperature " + filter + " ORDER BY time";
+  var stmt = "SELECT * FROM sensorstream " + filter + " ORDER BY time";
   db.all(stmt, function(err, rows) {
     res.send(rows);
   });
 });
 
 router.get('/api/v1/temperature/current', function(req, res, next) {
-  db.all("SELECT * FROM temperature ORDER BY time DESC LIMIT 1", function(err, rows) {
+  db.all("SELECT * FROM sensorstream ORDER BY time DESC LIMIT 1", function(err, rows) {
     res.send(rows);
   });
 });
