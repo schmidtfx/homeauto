@@ -12,7 +12,9 @@ $(function() {
       "columns" : [
         { "data" : "time" },
         { "data" : "value_real" }
-      ]
+      ],
+      "searching" : false,
+      "ordering" : false
     });
   }
 });
