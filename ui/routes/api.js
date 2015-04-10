@@ -5,7 +5,7 @@ var sqlite3 = require('sqlite3').verbose();
 var db = new sqlite3.Database('/home/pi/homeauto/backend/temp.db');
 
 var getSensorStream = function(sensor_id, starttime, endtime, offset, limit, callback) {
-  var filter = "WHERE sensor_fk = " + sensor_id;
+  var filter = "WHERE sensor_fk = ?";
   if(starttime && endtime) {
     filter += " AND time >= " + starttime + " AND time <= " + endtime;
   } else if(starttime) {
@@ -22,7 +22,7 @@ var getSensorStream = function(sensor_id, starttime, endtime, offset, limit, cal
     stmt += " OFFSET " + offset;
   }
   console.log(stmt);
-  db.all(stmt, callback);
+  db.all(stmt, sensor_id, callback);
 }
 
 var getSensorStreamLatest = function(sensor_id, callback) {
@@ -71,7 +71,7 @@ router.get('/v1/sensorstream/:sid/pagination', function(req, res, next) {
     getSensorStream(sensor_id, starttime, endtime, start, length, function(err, rows) {
       var result = {
         "draw" : 1,
-        "recordsTotal" : row.length,
+        "recordsTotal" : rows.length,
         "recordsFiltered" : row.length,
         "aaData" : rows
       }
