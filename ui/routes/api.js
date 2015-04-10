@@ -48,9 +48,9 @@ router.get('/v1/sensorstream/:sid', function(req, res, next) {
   var sensor_id = req.params.sid;
   var starttime = req.query.starttime;
   var endtime = req.query.endtime;
-  var offset = req.query.offset;
-  var limit = req.query.limit;
-  getSensorStream(sensor_id, starttime, endtime, offset, limit, function(err, rows) {
+  var start = req.query.start;
+  var length = req.query.length;
+  getSensorStream(sensor_id, starttime, endtime, start, length, function(err, rows) {
     res.send(rows);
   });
 });
