@@ -6,6 +6,7 @@ $(function() {
     $("#filter").change(withSelectedFilter);
   } else if(current_page == "sensorstream") {
     $("#sensorstream").dataTable({
+      "iDisplayLength" : 100,
       "processing" : true,
       "serverSide" : true,
       "ajax" : "/api/v1/sensorstream/1/pagination",
