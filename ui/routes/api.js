@@ -73,7 +73,7 @@ router.get('/v1/sensorstream/:sid/pagination', function(req, res, next) {
         "draw" : 1,
         "recordsTotal" : row.length,
         "recordsFiltered" : row.length,
-        "data" : rows
+        "aaData" : rows
       }
       res.send(result);
     });
