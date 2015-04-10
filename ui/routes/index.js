@@ -16,11 +16,11 @@ router.get('/temperature', function(req, res, next) {
 router.get('/api/v1/temperature', function(req, res, next) {
   var filter = "WHERE sensor_fk = 1";
   if(req.query.starttime && req.query.endtime) {
-    filter = " AND time >= " + req.query.starttime + " AND time <= " + req.query.endtime;
+    filter += " AND time >= " + req.query.starttime + " AND time <= " + req.query.endtime;
   } else if(req.query.starttime) {
-    filter = " AND time >= " + req.query.starttime;
+    filter += " AND time >= " + req.query.starttime;
   } else if(req.query.endtime) {
-    filter = " AND time <= " + req.query.endtime;
+    filter += " AND time <= " + req.query.endtime;
   }
 
   var stmt = "SELECT * FROM sensorstream " + filter + " ORDER BY time";
