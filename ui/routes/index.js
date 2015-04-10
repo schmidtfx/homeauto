@@ -24,6 +24,7 @@ router.get('/api/v1/temperature', function(req, res, next) {
   }
 
   var stmt = "SELECT * FROM sensorstream " + filter + " ORDER BY time";
+  console.log(stmt)
   db.all(stmt, function(err, rows) {
     res.send(rows);
   });
