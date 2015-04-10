@@ -1,7 +1,13 @@
 import urllib2
+import ConfigParser
 
-city="Dublin,ie"
-url="http://api.openweathermap.org/data/2.5/weather?q=%s" % city
+config = ConfigParser.ConfigParser()
+config.readfp(open('weather.cfg'))
+
+city=config.get("Sensor", "query")
+address=config.get("Sensor", "url")
+url="%s?%s" % (address, city)
+print url
 
 response = urllib2.urlopen(url).read()
 print response
