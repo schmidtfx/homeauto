@@ -3,6 +3,8 @@ import ConfigParser
 import json
 import time
 
+from kafka import SimpleProducer, KafkaClient
+
 config = ConfigParser.ConfigParser()
 config.readfp(open('weather.cfg'))
 
@@ -15,6 +17,9 @@ sensor_id = str(config.get("Sensor", "id"))
 freq = int(config.get("Sensor", "freq"))
 
 print "Sensor id: %s - sampling frequency: %d" % (sensor_id, freq)
+
+kafka = KafkaClient("192.168.0.25:9092")
+producer = SimpleProducer(kafka)
 
 while True:
   weather_data = json.loads(urllib2.urlopen(url).read())
