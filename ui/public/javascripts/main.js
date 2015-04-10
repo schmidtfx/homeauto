@@ -1,4 +1,5 @@
 $(function() {
+  console.log("page: " + page)
   withSelectedFilter();
 
   $("#refresh").click(withSelectedFilter);
