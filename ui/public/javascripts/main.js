@@ -1,10 +1,10 @@
 $(function() {
   console.log("page: " + current_page)
-  withSelectedFilter();
-
-  $("#refresh").click(withSelectedFilter);
-
-  $("#filter").change(withSelectedFilter);
+  if(current_page == "temperature") {
+    withSelectedFilter();
+    $("#refresh").click(withSelectedFilter);
+    $("#filter").change(withSelectedFilter);
+  }
 });
 
 var withSelectedFilter = function() {
