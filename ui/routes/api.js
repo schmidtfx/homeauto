@@ -70,8 +70,9 @@ router.get('/v1/sensorstream/:sid/pagination', function(req, res, next) {
   getSensorStreamLength(sensor_id, function(err, row) {
     getSensorStream(sensor_id, starttime, endtime, start, length, function(err, rows) {
       var result = {
-        "draw" : 1,
+        "sEcho" : 0,
         "iTotalRecords" : row.length,
+        "iTotalDisplayRecords" : row.length,
         "aaData" : rows
       }
       res.send(result);
