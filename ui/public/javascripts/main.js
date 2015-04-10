@@ -4,6 +4,12 @@ $(function() {
     withSelectedFilter();
     $("#refresh").click(withSelectedFilter);
     $("#filter").change(withSelectedFilter);
+  } else if(current_page == "sensorstream") {
+    $("#sensorstream").dataTable({
+      "processing" : true,
+      "serverSide" : true,
+      "ajax" : "/api/v1/sensorstream/1"
+    });
   }
 });
 
