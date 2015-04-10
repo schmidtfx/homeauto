@@ -12,8 +12,8 @@ $(function() {
       "columns" : [
         {
           "data" : "time",
-          render : function(data, type, row) {
-            if(type == 'display' || type == 'filter') {
+          "render" : function(data, type, row) {
+            if(type == 'display') {
               var d = new Date(data);
               return d;
             }
@@ -21,7 +21,13 @@ $(function() {
           }
         },
         {
-          "data" : "value_real"
+          "data" : "value_real",
+          "render" : function(data, type, row) {
+            if(type == 'display') {
+              return data + " &deg;C"
+            }
+            return data;
+          }
         }
       ],
       "searching" : false,
