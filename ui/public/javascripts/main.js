@@ -8,7 +8,11 @@ $(function() {
     $("#sensorstream").dataTable({
       "processing" : true,
       "serverSide" : true,
-      "ajax" : "/api/v1/sensorstream/1/pagination"
+      "ajax" : "/api/v1/sensorstream/1/pagination",
+      "columns" : [
+        { "data" : "time" },
+        { "data" : "value_real" }
+      ]
     });
   }
 });
