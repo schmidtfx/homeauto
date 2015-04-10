@@ -13,4 +13,8 @@ router.get('/temperature', function(req, res, next) {
   res.render('temperature', { title: 'Temperature', page: 'temperature' });
 });
 
+router.get('/sensorstream', function(req, res, next) {
+  res.render('sensorstream', { title: 'Sensorstream', page: 'sensorstream' });
+});
+
 module.exports = router;
