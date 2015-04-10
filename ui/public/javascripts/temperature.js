@@ -29,10 +29,10 @@ var loaddata = function(starttime, endtime) {
     $('#temp').text(d.value_real.toFixed(2));
     $('#time').text(dateFormat(d.time, "yyyy-mm-dd HH:MM:ss"));
     $('#ago').text(diff);
-    if(d.value_real < 20) {
+    if(d.value_real < 19) {
       $('#comfort').removeClass().addClass("label label-primary");
       $('#comfort').text("Too cold!");
-    } else if(d.value_real >= 20 && d.value_real <= 23.5) {
+    } else if(d.value_real >= 19 && d.value_real <= 22) {
       $('#comfort').removeClass().addClass("label label-success");
       $('#comfort').text("Comfy :)");
     } else {
@@ -65,7 +65,7 @@ var createGraph = function(element) {
       }
     },
     regions: [
-      { axis: 'y', start: 20, end: 23.5, class: 'regionY' }
+      { axis: 'y', start: 19, end: 22, class: 'regionY' }
     ]
   });
   return chart;
