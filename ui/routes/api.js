@@ -4,7 +4,7 @@ var router = express.Router();
 var sqlite3 = require('sqlite3').verbose();
 var db = new sqlite3.Database('/home/pi/homeauto/backend/temp.db');
 
-var getSensorStream = function(sensor_id, starttime, endtime, callback) {
+var getSensorStream = function(sensor_id, starttime, endtime, offset, limit, callback) {
   var filter = "WHERE sensor_fk = " + sensor_id;
   if(starttime && endtime) {
     filter += " AND time >= " + starttime + " AND time <= " + endtime;
@@ -15,6 +15,12 @@ var getSensorStream = function(sensor_id, starttime, endtime, callback) {
   }
 
   var stmt = "SELECT * FROM sensorstream " + filter + " ORDER BY time";
+  if(limit) {
+    stmt += " LIMIT " + limit;
+  }
+  if(offset) {
+    stmt += " OFFSET " + offset;
+  }
   console.log(stmt);
   db.all(stmt, callback);
 }
@@ -27,20 +33,24 @@ var getSensorStreamLatest = function(sensor_id, callback) {
 
 /* GET home page. */
 router.get('/v1/temperature', function(req, res, next) {
-  getSensorStream(1, req.query.starttime, req.query.endtime, function(err, rows) {
+  getSensorStream(1, req.query.starttime, req.query.endtime, null, null, function(err, rows) {
     res.send(rows);
   });
 });
 
 router.get('/v1/temperature/current', function(req, res, next) {
-  db.all("SELECT * FROM sensorstream WHERE sensor_fk = 1 ORDER BY time DESC LIMIT 1", function(err, rows) {
+  getSensorStreamLatest(1, function(err, rows) {
     res.send(rows);
   });
 });
 
 router.get('/v1/sensorstream/:sid', function(req, res, next) {
   var sensor_id = req.params.sid;
-  getSensorStream(sensor_id, req.query.starttime, req.query.endtime, function(err, rows) {
+  var starttime = req.query.starttime;
+  var endtime = req.query.endtime;
+  var offset = req.query.offset;
+  var limit = req.query.limit;
+  getSensorStream(sensor_id, starttime, endtime, offset, limit, function(err, rows) {
     res.send(rows);
   });
 });
@@ -51,5 +61,9 @@ router.get('/v1/sensorstream/:sid/latest', function(req, res, next) {
     res.send(rows);
   });
 });
+
+//router.get('/v1/sensorstream', function(req, res, next) {
+//  res.send();
+//});
 
 module.exports = router;
