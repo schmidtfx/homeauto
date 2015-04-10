@@ -14,13 +14,13 @@ router.get('/temperature', function(req, res, next) {
 });
 
 router.get('/api/v1/temperature', function(req, res, next) {
-  var filter = "";
+  var filter = "WHERE sensor_fk = 1";
   if(req.query.starttime && req.query.endtime) {
-    filter = "WHERE time >= " + req.query.starttime + " AND time <= " + req.query.endtime;
+    filter = "AND time >= " + req.query.starttime + " AND time <= " + req.query.endtime;
   } else if(req.query.starttime) {
-    filter = "WHERE time >= " + req.query.starttime;
+    filter = "AND time >= " + req.query.starttime;
   } else if(req.query.endtime) {
-    filter = "WHERE time <= " + req.query.endtime;
+    filter = "AND time <= " + req.query.endtime;
   }
 
   var stmt = "SELECT * FROM sensorstream " + filter + " ORDER BY time";
@@ -30,7 +30,7 @@ router.get('/api/v1/temperature', function(req, res, next) {
 });
 
 router.get('/api/v1/temperature/current', function(req, res, next) {
-  db.all("SELECT * FROM sensorstream ORDER BY time DESC LIMIT 1", function(err, rows) {
+  db.all("SELECT * FROM sensorstream WHERE sensor_fk = 1 ORDER BY time DESC LIMIT 1", function(err, rows) {
     res.send(rows);
   });
 });
