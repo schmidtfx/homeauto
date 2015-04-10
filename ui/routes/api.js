@@ -31,6 +31,12 @@ var getSensorStreamLatest = function(sensor_id, callback) {
   db.get(stmt, sensor_id, callback);
 }
 
+var getSensorStreamLength = function(sensor_id, callback) {
+  var stmt = "SELECT count(1) as length FROM sensorstream WHERE sensor_fk = ?";
+  console.log(stmt);
+  db.get(stmt, sensor_id, callback);
+}
+
 /* GET home page. */
 router.get('/v1/temperature', function(req, res, next) {
   getSensorStream(1, req.query.starttime, req.query.endtime, null, null, function(err, rows) {
@@ -61,11 +67,16 @@ router.get('/v1/sensorstream/:sid/pagination', function(req, res, next) {
   var endtime = req.query.endtime;
   var start = req.query.start;
   var length = req.query.length;
-  getSensorStream(sensor_id, starttime, endtime, start, length, function(err, rows) {
-    var result = {
-      "aaData" : rows
-    }
-    res.send(result);
+  getSensorStreamLength(sensor_id, function(err, row) {
+    getSensorStream(sensor_id, starttime, endtime, start, length, function(err, rows) {
+      var result = {
+        "draw" : 1,
+        "recordsTotal" : row.length,
+        "recordsFiltered" : rows.length,
+        "data" : rows
+      }
+      res.send(result);
+    });
   });
 });
 
