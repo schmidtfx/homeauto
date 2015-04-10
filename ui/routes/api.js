@@ -72,7 +72,7 @@ router.get('/v1/sensorstream/:sid/pagination', function(req, res, next) {
       var result = {
         "draw" : 1,
         "recordsTotal" : row.length,
-        "recordsFiltered" : rows.length,
+        "recordsFiltered" : row.length,
         "data" : rows
       }
       res.send(result);
