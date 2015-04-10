@@ -28,9 +28,9 @@ router.get('/v1/temperature/current', function(req, res, next) {
   });
 });
 
-router.get('/v1/sensorstream/:id', function(req, res, next) {
-  var sensor_id = req.params.id;
-  console.log("sensor id: " + id)
+router.get('/v1/sensorstream/:sid', function(req, res, next) {
+  var sensor_id = req.params.sid;
+  console.log("sensor id: " + sensor_id)
   res.send({})
 });
 
