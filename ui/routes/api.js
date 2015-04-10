@@ -55,6 +55,20 @@ router.get('/v1/sensorstream/:sid', function(req, res, next) {
   });
 });
 
+router.get('/v1/sensorstream/:sid/pagination', function(req, res, next) {
+  var sensor_id = req.params.sid;
+  var starttime = req.query.starttime;
+  var endtime = req.query.endtime;
+  var start = req.query.start;
+  var length = req.query.length;
+  getSensorStream(sensor_id, starttime, endtime, start, length, function(err, rows) {
+    var result = {
+      "aaData" : rows
+    }
+    res.send(result);
+  });
+});
+
 router.get('/v1/sensorstream/:sid/latest', function(req, res, next) {
   var sensor_id = req.params.sid;
   getSensorStreamLatest(sensor_id, function(err, rows) {
