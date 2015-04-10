@@ -16,7 +16,7 @@ var getSensorStream = function(sensor_id, starttime, endtime, callback) {
 
   var stmt = "SELECT * FROM sensorstream " + filter + " ORDER BY time";
   console.log(stmt)
-  db.all(stmt, callbak);
+  db.all(stmt, callback);
 }
 
 /* GET home page. */
