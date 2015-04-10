@@ -31,6 +31,7 @@ router.get('/v1/temperature/current', function(req, res, next) {
 router.get('/v1/sensorstream/:id', function(req, res, next) {
   var sensor_id = req.params.id;
   console.log("sensor id: " + id)
+  res.send({})
 });
 
 module.exports = router;
