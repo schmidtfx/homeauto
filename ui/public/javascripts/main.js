@@ -70,8 +70,7 @@ var loaddata = function(starttime, endtime) {
     });
   });
 
-  $.getJSON("/api/v1/temperature/current", function(data) {
-    var d = data[0];
+  $.getJSON("/api/v1/sensorstream/1/latest", function(d) {
     d.time = new Date(d.time);
     var now = new Date();
     var diff = ((now - d.time) / 1000).toFixed(0);
