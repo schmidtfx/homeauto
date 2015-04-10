@@ -10,8 +10,19 @@ $(function() {
       "serverSide" : true,
       "ajax" : "/api/v1/sensorstream/1/pagination",
       "columns" : [
-        { "data" : "time" },
-        { "data" : "value_real" }
+        {
+          "data" : "time",
+          render : function(data, type, row) {
+            if(type == 'display' || type == 'filter') {
+              var d = new Date(data);
+              return d;
+            }
+            return data;
+          }
+        },
+        {
+          "data" : "value_real"
+        }
       ],
       "searching" : false,
       "ordering" : false
