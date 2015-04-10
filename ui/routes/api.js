@@ -15,8 +15,14 @@ var getSensorStream = function(sensor_id, starttime, endtime, callback) {
   }
 
   var stmt = "SELECT * FROM sensorstream " + filter + " ORDER BY time";
-  console.log(stmt)
+  console.log(stmt);
   db.all(stmt, callback);
+}
+
+var getSensorStreamLatest = function(sensor_id, callback) {
+  var stmt = "SELECT * FROM sensorstream WHERE sensor_fk = ? ORDER BY time DESC LIMIT 1";
+  console.log(stmt);
+  db.get(stmt, sensor_id, callback);
 }
 
 /* GET home page. */
@@ -35,6 +41,13 @@ router.get('/v1/temperature/current', function(req, res, next) {
 router.get('/v1/sensorstream/:sid', function(req, res, next) {
   var sensor_id = req.params.sid;
   getSensorStream(sensor_id, req.query.starttime, req.query.endtime, function(err, rows) {
+    res.send(rows);
+  });
+});
+
+router.get('/v1/sensorstream/:sid/latest', function(req, res, next) {
+  var sensor_id = req.params.sid;
+  getSensorStreamLatest(sensor_id, function(err, rows) {
     res.send(rows);
   });
 });

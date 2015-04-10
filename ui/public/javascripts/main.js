@@ -20,7 +20,7 @@ var withSelectedFilter = function() {
 }
 
 var loaddata = function(starttime, endtime) {
-  var url = "/api/v1/temperature"
+  var url = "/api/v1/sensorstream/1"
   var params = $.param({ starttime: starttime, endtime: endtime })
   console.log(params)
   url = url + "?" + params
