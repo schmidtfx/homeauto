@@ -45,6 +45,7 @@ var loaddata = function(starttime, endtime) {
 var createGraph = function(element) {
   var chart = c3.generate({
     bindto: element,
+    columns : [],
     point: {
       show: false
     },
