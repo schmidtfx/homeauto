@@ -76,7 +76,7 @@ var createGraph = function(element) {
 
 var loadGraph = function(chart, sensor_id, start_time, end_time, color) {
   var url = '/api/v1/sensorstream/' + sensor_id;
-  var params = $.param({ starttime: starttime, endtime: endtime });
+  var params = $.param({ starttime: start_time, endtime: end_time });
   console.log(params);
   url = url + "?" + params
   $.getJSON(url, function(data) {
