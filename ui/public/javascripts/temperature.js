@@ -47,7 +47,7 @@ var createGraph = function(element) {
   var chart = c3.generate({
     bindto: element,
     data : {
-      columns: []
+      json: []
     },
     point: {
       show: false
