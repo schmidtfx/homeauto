@@ -20,7 +20,7 @@ var withSelectedFilter = function() {
 var loaddata = function(starttime, endtime) {
 
   var chart = createGraph('#tempChart');
-  loadGraph(chart, 1, starttime, endtime);
+  loadGraph(chart, 1, starttime, endtime, '#33339F');
 
   $.getJSON("/api/v1/sensorstream/1/latest", function(d) {
     d.time = new Date(d.time);
@@ -71,8 +71,8 @@ var createGraph = function(element) {
   return chart;
 }
 
-var loadGraph = function(chart, sensor_id, start_time, end_time) {
-  var url = '/api/v1/sensorstream' + sensor_id;
+var loadGraph = function(chart, sensor_id, start_time, end_time, color) {
+  var url = '/api/v1/sensorstream/' + sensor_id;
   var params = $.param({ starttime: starttime, endtime: endtime });
   console.log(params);
   url = url + "?" + params
@@ -89,7 +89,7 @@ var loadGraph = function(chart, sensor_id, start_time, end_time) {
       },
       type: 'spline',
       colors: {
-        value_real: '#33339F'
+        value_real: color
       },
       names: {
         value_real: "Temperature Livingroom"
